@@ -1,0 +1,340 @@
+/* BookFairy Theme Styles */
+
+.day-theme {
+  background: linear-gradient(135deg, #87CEEB 0%, #F0E68C 50%, #98FB98 100%);
+  color: #2F4F4F;
+}
+
+.night-theme {
+  background: linear-gradient(135deg, #2F1B69 0%, #4B0082 50%, #2E8B57 100%);
+  color: #E6E6FA;
+}
+
+/* Sparkle animations */
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.sparkle-animation {
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+/* Fairy button styles */
+.fairy-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 25px;
+  color: white;
+  padding: 12px 24px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.fairy-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Floating animation for fairy */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Enhanced floating animation for main fairy character */
+@keyframes fairyFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-8px) rotate(-1deg);
+  }
+}
+
+/* Clean fairy character styling for transparent PNGs */
+.fairy-character {
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.fairy-character:hover {
+  transform: scale(1.05);
+}
+
+/* Sparkle animation for floating fairy interactions */
+@keyframes sparkleFloat {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(-20px) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.5);
+  }
+}
+
+/* Enhanced floating animation for the flying fairy */
+@keyframes fairyFloatGentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-3px) rotate(1deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-3px) rotate(-1deg);
+  }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+.fairy-card {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.night-theme .fairy-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.fairy-button {
+  background: linear-gradient(45deg, #FFD700, #FFA500);
+  border: none;
+  border-radius: 25px;
+  color: #2F4F4F;
+  padding: 12px 24px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.fairy-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+}
+
+.night-theme .fairy-button {
+  background: linear-gradient(45deg, #9370DB, #BA55D3);
+  color: #E6E6FA;
+  box-shadow: 0 4px 15px rgba(147, 112, 219, 0.3);
+}
+
+.night-theme .fairy-button:hover {
+  box-shadow: 0 6px 20px rgba(147, 112, 219, 0.4);
+}
+
+.fairy-sparkle {
+  animation: sparkle 2s infinite;
+  font-size: 1.5rem;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.2); }
+}
+
+.fairy-glow {
+  filter: drop-shadow(0 0 10px #FFD700);
+  animation: glow 3s ease-in-out infinite alternate;
+}
+
+.night-theme .fairy-glow {
+  filter: drop-shadow(0 0 10px #9370DB);
+}
+
+@keyframes glow {
+  0% { filter: drop-shadow(0 0 5px currentColor); }
+  100% { filter: drop-shadow(0 0 20px currentColor); }
+}
+
+@keyframes fadeOut {
+  0% { 
+    opacity: 1; 
+    transform: translateY(0px) scale(1); 
+  }
+  100% { 
+    opacity: 0; 
+    transform: translateY(-30px) scale(0.5); 
+  }
+}
+
+/* Simple elegant fairy sparkle animation */
+@keyframes fairySparkle {
+  0% { 
+    opacity: 1; 
+    transform: scale(0.5); 
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.2); 
+  }
+  100% { 
+    opacity: 0; 
+    transform: scale(0.8) translateY(-20px); 
+  }
+}
+
+.book-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.book-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.night-theme .book-card {
+  background: rgba(255, 255, 255, 0.1);
+  color: #E6E6FA;
+}
+
+.speech-bubble {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 16px;
+  position: relative;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 30px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid rgba(255, 255, 255, 0.95);
+}
+
+.night-theme .speech-bubble {
+  background: rgba(147, 112, 219, 0.9);
+  color: #E6E6FA;
+}
+
+.night-theme .speech-bubble::after {
+  border-top-color: rgba(147, 112, 219, 0.9);
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  padding: 20px;
+}
+
+.menu-item {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.menu-item:hover {
+  transform: translateY(-3px);
+  border-color: #FFD700;
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+}
+
+.night-theme .menu-item {
+  background: rgba(255, 255, 255, 0.1);
+  color: #E6E6FA;
+}
+
+.night-theme .menu-item:hover {
+  border-color: #9370DB;
+  box-shadow: 0 6px 20px rgba(147, 112, 219, 0.3);
+}
+
+.fairy-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #FFD700, #FFA500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #2F4F4F;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.night-theme .fairy-avatar {
+  background: linear-gradient(45deg, #9370DB, #BA55D3);
+  color: #E6E6FA;
+  box-shadow: 0 4px 15px rgba(147, 112, 219, 0.3);
+}
+
+.pwa-install-button {
+  background: linear-gradient(45deg, #32CD32, #228B22);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 24px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(50, 205, 50, 0.3);
+}
+
+.pwa-install-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(50, 205, 50, 0.4);
+}
+
+@media (max-width: 768px) {
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 16px;
+  }
+  
+  .menu-item {
+    padding: 16px;
+  }
+  
+  .fairy-avatar {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+}

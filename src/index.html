@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="BookFairy">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#4A148C">
+  <title>BookFairy - Your Magical Audiobook Library</title>
+  <style>
+    /* Prevent zooming and ensure mobile behavior */
+    html, body {
+      touch-action: manipulation;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+    }
+    
+    /* Loading screen */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      color: white;
+    }
+    
+    .fairy-loading {
+      text-align: center;
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+  </style>
+</head>
+<body>
+  <div id="loading-screen">
+    <div class="fairy-loading">
+      <div style="font-size: 3rem; margin-bottom: 1rem;">🧚‍♀️</div>
+      <div style="font-size: 1.2rem;">BookFairy is awakening...</div>
+    </div>
+  </div>
+  <div id="root"></div>
+  <script>
+    // Hide loading screen when app loads
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(() => {
+        const loadingScreen = document.getElementById('loading-screen');
+        if (loadingScreen) {
+          loadingScreen.style.opacity = '0';
+          loadingScreen.style.transition = 'opacity 0.5s ease-out';
+          setTimeout(() => {
+            loadingScreen.remove();
+          }, 500);
+        }
+      }, 1000);
+    });
+    
+    // Prevent zoom on iOS Safari
+    document.addEventListener('gesturestart', function (e) {
+      e.preventDefault();
+    });
+    
+    // Prevent double-tap zoom
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function (event) {
+      const now = (new Date()).getTime();
+      if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+      }
+      lastTouchEnd = now;
+    }, false);
+  </script>
+</body>
+</html>
