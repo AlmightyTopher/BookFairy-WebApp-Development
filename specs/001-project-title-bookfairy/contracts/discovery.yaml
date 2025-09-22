@@ -1,0 +1,388 @@
+openapi: 3.0.3
+info:
+  title: BookFairy Discovery API
+  description: Readar discovery engine and book search functionality
+  version: 1.0.0
+
+paths:
+  /discovery/readar:
+    get:
+      summary: Get readar-scanned book recommendations
+      description: Passive discovery using radar-like scanning for effortless book surfacing
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: scan_intensity
+          in: query
+          description: Discovery sensitivity (1-10, default 5)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 10
+            default: 5
+        - name: include_trending
+          in: query
+          description: Include trending books in scan
+          schema:
+            type: boolean
+            default: true
+        - name: limit
+          in: query
+          description: Maximum number of books to return
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 20
+      responses:
+        '200':
+          description: Readar scan results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  scan_results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DiscoveredBook'
+                  scan_metadata:
+                    $ref: '#/components/schemas/ScanMetadata'
+                  fairy_commentary:
+                    type: string
+                    description: BookFairy's voice describing the scan results
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /discovery/search:
+    get:
+      summary: Search books by criteria
+      description: Traditional search with author, title, and genre filters
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: query
+          in: query
+          description: Search term for title or author
+          schema:
+            type: string
+            minLength: 1
+        - name: author
+          in: query
+          description: Filter by specific author
+          schema:
+            type: string
+        - name: genre
+          in: query
+          description: Filter by genre
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          description: Books per page
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  books:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Book'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  search_metadata:
+                    type: object
+                    properties:
+                      query_used:
+                        type: string
+                      filters_applied:
+                        type: object
+                      total_results:
+                        type: integer
+        '400':
+          description: Invalid search parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /discovery/recommendations:
+    get:
+      summary: Get personalized book recommendations
+      description: Lazy librarian auto-curation based on user preferences and history
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: recommendation_type
+          in: query
+          description: Type of recommendations to generate
+          schema:
+            type: string
+            enum: [similar_authors, genre_exploration, trending, personal_mix]
+            default: personal_mix
+        - name: limit
+          in: query
+          description: Number of recommendations
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+      responses:
+        '200':
+          description: Personalized recommendations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  recommendations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RecommendedBook'
+                  recommendation_reasoning:
+                    type: array
+                    items:
+                      type: string
+                    description: Why these books were recommended
+                  fairy_suggestions:
+                    type: string
+                    description: BookFairy's commentary on the recommendations
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /discovery/genres:
+    get:
+      summary: Get available book genres
+      description: List all genres available for browsing and filtering
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Available genres
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  genres:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        book_count:
+                          type: integer
+                        trending:
+                          type: boolean
+                  popular_genres:
+                    type: array
+                    items:
+                      type: string
+                    description: Currently popular genres
+
+  /discovery/authors:
+    get:
+      summary: Search authors with book counts
+      description: Search and browse authors with their available book counts
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: query
+          in: query
+          description: Author name search term
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Number of authors to return
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+      responses:
+        '200':
+          description: Author search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  authors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        book_count:
+                          type: integer
+                        popular_books:
+                          type: array
+                          items:
+                            type: string
+                          description: Titles of popular books by this author
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Book:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        hardcover_id:
+          type: string
+        title:
+          type: string
+        author:
+          type: string
+        narrator:
+          type: string
+        cover_image_url:
+          type: string
+          format: uri
+        synopsis:
+          type: string
+          maxLength: 500
+        genre:
+          type: array
+          items:
+            type: string
+        publication_date:
+          type: string
+          format: date
+        duration_minutes:
+          type: integer
+        availability_status:
+          type: string
+          enum: [available, processing, unavailable]
+      required:
+        - id
+        - title
+        - author
+        - cover_image_url
+        - synopsis
+        - availability_status
+
+    DiscoveredBook:
+      allOf:
+        - $ref: '#/components/schemas/Book'
+        - type: object
+          properties:
+            discovery_score:
+              type: number
+              description: Readar discovery relevance score (0-100)
+            discovery_reason:
+              type: string
+              description: Why this book was surfaced by readar
+            scan_coordinates:
+              type: object
+              properties:
+                x:
+                  type: number
+                y:
+                  type: number
+              description: Visual position in radar UI
+
+    RecommendedBook:
+      allOf:
+        - $ref: '#/components/schemas/Book'
+        - type: object
+          properties:
+            recommendation_score:
+              type: number
+              description: Recommendation confidence (0-100)
+            recommendation_reasons:
+              type: array
+              items:
+                type: string
+              description: Specific reasons for recommendation
+            similarity_to_library:
+              type: number
+              description: Similarity to user's existing library (0-100)
+
+    ScanMetadata:
+      type: object
+      properties:
+        scan_timestamp:
+          type: string
+          format: date-time
+        scan_duration_ms:
+          type: integer
+        total_books_scanned:
+          type: integer
+        filters_applied:
+          type: object
+        user_preferences_used:
+          type: boolean
+        trending_weight:
+          type: number
+          description: How much trending data influenced results
+
+    Pagination:
+      type: object
+      properties:
+        current_page:
+          type: integer
+        total_pages:
+          type: integer
+        total_items:
+          type: integer
+        items_per_page:
+          type: integer
+        has_next:
+          type: boolean
+        has_previous:
+          type: boolean
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        fairy_message:
+          type: string
+      required:
+        - error
+        - message

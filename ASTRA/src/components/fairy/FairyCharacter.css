@@ -1,0 +1,730 @@
+/**
+ * Fairy Character Styles
+ *
+ * CSS animations and styling for the BookFairy character component
+ * Includes responsive design, accessibility, and magical effects
+ */
+
+/* Base fairy character container */
+.fairy-character {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: all;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center bottom;
+  opacity: 0;
+  transform: scale(0.8) translateY(20px);
+}
+
+.fairy-character--visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Size variations */
+.fairy-character--small {
+  width: 60px;
+  height: 80px;
+  font-size: 0.8rem;
+}
+
+.fairy-character--medium {
+  width: 80px;
+  height: 100px;
+  font-size: 1rem;
+}
+
+.fairy-character--large {
+  width: 120px;
+  height: 150px;
+  font-size: 1.2rem;
+}
+
+/* Position variations */
+.fairy-character--bottom-right {
+  bottom: 20px;
+  right: 20px;
+}
+
+.fairy-character--bottom-left {
+  bottom: 20px;
+  left: 20px;
+}
+
+.fairy-character--top-right {
+  top: 20px;
+  right: 20px;
+}
+
+.fairy-character--top-left {
+  top: 20px;
+  left: 20px;
+}
+
+.fairy-character--center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.fairy-character--floating {
+  top: 30%;
+  right: 10%;
+}
+
+/* Hover effects */
+.fairy-character--hovered {
+  transform: scale(1.05);
+}
+
+.fairy-character--hovered .fairy-wings {
+  animation-duration: 0.3s;
+}
+
+.fairy-character--hovered .fairy-sparkles {
+  opacity: 1;
+}
+
+/* Dragging state */
+.fairy-character--dragging {
+  z-index: 1001;
+  transform: scale(1.1) rotate(5deg);
+  filter: drop-shadow(0 8px 16px rgba(147, 51, 234, 0.3));
+}
+
+.fairy-character--dragging .fairy-wings {
+  animation-duration: 0.1s;
+}
+
+/* Fairy body structure */
+.fairy-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Head */
+.fairy-head {
+  position: relative;
+  width: 35%;
+  height: 30%;
+  margin-bottom: 5%;
+}
+
+.fairy-face {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #fef7cd, #fbbf24);
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
+}
+
+/* Eyes */
+.fairy-eyes {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20%;
+  width: 60%;
+}
+
+.fairy-eye {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  position: relative;
+  border: 1px solid #f59e0b;
+}
+
+.fairy-pupil {
+  width: 4px;
+  height: 4px;
+  background: #1f2937;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.2s ease;
+}
+
+/* Nose */
+.fairy-nose {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 2px;
+  background: #f59e0b;
+  border-radius: 50%;
+}
+
+/* Mouth */
+.fairy-mouth {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 6px;
+}
+
+.fairy-smile {
+  width: 100%;
+  height: 100%;
+  border-bottom: 2px solid #f59e0b;
+  border-radius: 0 0 12px 12px;
+}
+
+/* Hair */
+.fairy-hair {
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120%;
+  height: 80%;
+}
+
+.fairy-hair-strand {
+  position: absolute;
+  background: linear-gradient(145deg, #92400e, #d97706);
+  border-radius: 0 0 50% 50%;
+}
+
+.fairy-hair-strand--1 {
+  top: 0;
+  left: 20%;
+  width: 25%;
+  height: 70%;
+  transform: rotate(-15deg);
+}
+
+.fairy-hair-strand--2 {
+  top: 5%;
+  left: 40%;
+  width: 20%;
+  height: 80%;
+}
+
+.fairy-hair-strand--3 {
+  top: 0;
+  right: 20%;
+  width: 25%;
+  height: 70%;
+  transform: rotate(15deg);
+}
+
+/* Body/Torso */
+.fairy-body-torso {
+  position: relative;
+  width: 50%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Dress */
+.fairy-dress {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.fairy-dress-top {
+  width: 70%;
+  height: 40%;
+  background: linear-gradient(145deg, #c084fc, #9333ea);
+  border-radius: 8px 8px 0 0;
+  margin: 0 auto;
+  box-shadow: 0 2px 4px rgba(147, 51, 234, 0.3);
+}
+
+.fairy-dress-bottom {
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(145deg, #c084fc, #7c3aed);
+  border-radius: 0 0 50% 50%;
+  box-shadow: 0 4px 8px rgba(124, 58, 237, 0.3);
+  position: relative;
+}
+
+.fairy-dress-bottom::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #e879f9, transparent);
+  border-radius: 1px;
+}
+
+/* Arms */
+.fairy-arms {
+  position: absolute;
+  top: 20%;
+  width: 120%;
+  height: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.fairy-arm {
+  position: absolute;
+  width: 15%;
+  height: 80%;
+  background: linear-gradient(145deg, #fef7cd, #fbbf24);
+  border-radius: 50px;
+  box-shadow: 0 1px 2px rgba(251, 191, 36, 0.3);
+}
+
+.fairy-arm--left {
+  left: 0;
+  transform: rotate(-20deg);
+  transform-origin: top center;
+}
+
+.fairy-arm--right {
+  right: 0;
+  transform: rotate(20deg);
+  transform-origin: top center;
+}
+
+/* Wings */
+.fairy-wings {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 50%;
+  z-index: -1;
+}
+
+.fairy-wing {
+  position: absolute;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(145deg,
+    rgba(236, 254, 255, 0.8) 0%,
+    rgba(165, 243, 252, 0.6) 30%,
+    rgba(103, 232, 249, 0.4) 60%,
+    rgba(14, 165, 233, 0.3) 100%);
+  border-radius: 50% 20% 80% 40%;
+  animation: wing-flutter 1s ease-in-out infinite alternate;
+  box-shadow:
+    0 0 10px rgba(14, 165, 233, 0.3),
+    inset 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.fairy-wing--left {
+  left: 0;
+  transform-origin: bottom right;
+  animation-delay: 0s;
+}
+
+.fairy-wing--right {
+  right: 0;
+  transform: scaleX(-1);
+  transform-origin: bottom left;
+  animation-delay: 0.1s;
+}
+
+.fairy-wing-pattern {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(circle,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(165, 243, 252, 0.4) 40%,
+    transparent 70%);
+  border-radius: 50%;
+}
+
+/* Magic effects */
+.fairy-magic-effects {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -2;
+}
+
+.fairy-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(circle,
+    rgba(147, 51, 234, 0.2) 0%,
+    rgba(147, 51, 234, 0.1) 40%,
+    transparent 70%);
+  border-radius: 50%;
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+.fairy-sparkles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.fairy-sparkle {
+  position: absolute;
+  font-size: 12px;
+  animation: sparkle-dance 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.fairy-sparkle--1 { top: 10%; left: 20%; }
+.fairy-sparkle--2 { top: 20%; right: 15%; }
+.fairy-sparkle--3 { bottom: 30%; left: 10%; }
+.fairy-sparkle--4 { bottom: 20%; right: 20%; }
+.fairy-sparkle--5 { top: 40%; left: 5%; }
+.fairy-sparkle--6 { top: 60%; right: 5%; }
+
+.fairy-trail {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg,
+    transparent 0deg,
+    rgba(147, 51, 234, 0.1) 60deg,
+    transparent 120deg,
+    rgba(236, 72, 153, 0.1) 180deg,
+    transparent 240deg,
+    rgba(59, 130, 246, 0.1) 300deg,
+    transparent 360deg);
+  border-radius: 50%;
+  opacity: 0;
+  animation: trail-spin 4s linear infinite;
+}
+
+/* Message bubble */
+.fairy-message-bubble {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 10px;
+  max-width: 200px;
+  min-width: 120px;
+  background: linear-gradient(145deg, #ffffff, #f8fafc);
+  border: 2px solid #e2e8f0;
+  border-radius: 16px 16px 16px 4px;
+  padding: 12px 16px;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(147, 51, 234, 0.1);
+  animation: message-appear 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+}
+
+.fairy-message-content {
+  color: #374151;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  font-weight: 500;
+  text-align: center;
+}
+
+.fairy-message-content p {
+  margin: 0;
+}
+
+.fairy-message-tail {
+  position: absolute;
+  bottom: -8px;
+  left: 24px;
+  width: 16px;
+  height: 16px;
+  background: linear-gradient(135deg, #ffffff, #f8fafc);
+  border-right: 2px solid #e2e8f0;
+  border-bottom: 2px solid #e2e8f0;
+  transform: rotate(45deg);
+}
+
+/* Typing indicator */
+.fairy-typing-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 20px;
+}
+
+.fairy-typing-indicator span {
+  width: 6px;
+  height: 6px;
+  background: #9333ea;
+  border-radius: 50%;
+  animation: typing-bounce 1.4s ease-in-out infinite;
+}
+
+.fairy-typing-indicator span:nth-child(1) { animation-delay: 0s; }
+.fairy-typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.fairy-typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+/* Animation states */
+.fairy-character--idle {
+  animation: idle-sway 4s ease-in-out infinite;
+}
+
+.fairy-character--wave .fairy-arm--right {
+  animation: arm-wave 1s ease-in-out;
+}
+
+.fairy-character--bounce {
+  animation: bounce-up 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.fairy-character--float {
+  animation: gentle-float 2s ease-in-out infinite;
+}
+
+.fairy-character--spin {
+  animation: magical-spin 1s ease-in-out;
+}
+
+.fairy-character--celebrate .fairy-arms {
+  animation: celebrate-arms 1s ease-in-out;
+}
+
+.fairy-character--cheer {
+  animation: cheer-bounce 0.8s ease-in-out 3;
+}
+
+.fairy-character--search .fairy-head {
+  animation: search-look 1.5s ease-in-out;
+}
+
+.fairy-character--sad .fairy-mouth .fairy-smile {
+  transform: rotate(180deg);
+  border-top: 2px solid #f59e0b;
+  border-bottom: none;
+}
+
+.fairy-character--land {
+  animation: landing-bounce 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Emotion-based styles */
+.fairy-character--happy .fairy-eyes .fairy-pupil {
+  transform: translate(-50%, -60%);
+}
+
+.fairy-character--excited .fairy-sparkles {
+  opacity: 1;
+  animation-duration: 1s;
+}
+
+.fairy-character--playful {
+  animation: playful-wiggle 0.5s ease-in-out 3;
+}
+
+.fairy-character--helpful .fairy-glow {
+  opacity: 0.8;
+  animation-duration: 2s;
+}
+
+.fairy-character--encouraging .fairy-wings {
+  animation-duration: 0.5s;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .fairy-character--small {
+    width: 50px;
+    height: 70px;
+  }
+
+  .fairy-character--medium {
+    width: 70px;
+    height: 90px;
+  }
+
+  .fairy-character--large {
+    width: 100px;
+    height: 130px;
+  }
+
+  .fairy-message-bubble {
+    max-width: 150px;
+    font-size: 0.8rem;
+    padding: 8px 12px;
+  }
+}
+
+/* Animations keyframes */
+@keyframes wing-flutter {
+  0% { transform: rotateX(0deg) rotateY(10deg); }
+  100% { transform: rotateX(20deg) rotateY(-10deg); }
+}
+
+@keyframes idle-sway {
+  0%, 100% { transform: rotate(0deg) translateY(0px); }
+  25% { transform: rotate(1deg) translateY(-2px); }
+  50% { transform: rotate(0deg) translateY(-1px); }
+  75% { transform: rotate(-1deg) translateY(-2px); }
+}
+
+@keyframes bounce-up {
+  0% { transform: scale(1) translateY(0px); }
+  50% { transform: scale(1.1) translateY(-20px); }
+  100% { transform: scale(1) translateY(0px); }
+}
+
+@keyframes gentle-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes magical-spin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes arm-wave {
+  0%, 100% { transform: rotate(20deg); }
+  25% { transform: rotate(-10deg); }
+  50% { transform: rotate(30deg); }
+  75% { transform: rotate(0deg); }
+}
+
+@keyframes celebrate-arms {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.1) rotate(-10deg); }
+  50% { transform: scale(1.2) rotate(0deg); }
+  75% { transform: scale(1.1) rotate(10deg); }
+}
+
+@keyframes cheer-bounce {
+  0%, 100% { transform: scale(1) translateY(0px); }
+  50% { transform: scale(1.15) translateY(-15px); }
+}
+
+@keyframes search-look {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-15deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(15deg); }
+}
+
+@keyframes landing-bounce {
+  0% { transform: scale(1.2) translateY(-10px); }
+  50% { transform: scale(0.9) translateY(5px); }
+  100% { transform: scale(1) translateY(0px); }
+}
+
+@keyframes playful-wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(5deg); }
+  75% { transform: rotate(-5deg); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+@keyframes sparkle-dance {
+  0%, 100% { opacity: 0.5; transform: scale(1) rotate(0deg); }
+  25% { opacity: 1; transform: scale(1.2) rotate(90deg); }
+  50% { opacity: 0.7; transform: scale(0.8) rotate(180deg); }
+  75% { opacity: 1; transform: scale(1.1) rotate(270deg); }
+}
+
+@keyframes trail-spin {
+  0% { opacity: 0; transform: translate(-50%, -50%) rotate(0deg); }
+  20% { opacity: 0.3; }
+  80% { opacity: 0.3; }
+  100% { opacity: 0; transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes typing-bounce {
+  0%, 60%, 100% { transform: translateY(0px); }
+  30% { transform: translateY(-8px); }
+}
+
+@keyframes message-appear {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.8) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1) translateY(0px);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .fairy-character,
+  .fairy-wings,
+  .fairy-sparkles,
+  .fairy-glow,
+  .fairy-trail {
+    animation: none !important;
+  }
+
+  .fairy-character--visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .fairy-message-bubble {
+    animation: none;
+  }
+}
+
+/* Focus styles for accessibility */
+.fairy-character:focus {
+  outline: 2px solid #9333ea;
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+.fairy-character:focus-visible {
+  outline: 2px solid #9333ea;
+  outline-offset: 4px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .fairy-face,
+  .fairy-dress-top,
+  .fairy-dress-bottom {
+    border: 2px solid currentColor;
+  }
+
+  .fairy-message-bubble {
+    border: 2px solid currentColor;
+    background: white;
+    color: black;
+  }
+}
